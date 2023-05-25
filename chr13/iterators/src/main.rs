@@ -7,6 +7,16 @@ fn main() {
     }
 }
 
+fn audio_decoder_snippet() {
+    let buffer: &mut [i32];
+    let coefficients: [i64; 12];
+    let qlp_shift: i16;
+
+    for i in 12..buffer.len() {
+        let prediction = coefficients.iter();
+    }
+}
+
 #[test]
 fn iterator_demonstration() {
     let v1 = vec![1, 2, 3];
