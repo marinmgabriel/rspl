@@ -41,14 +41,26 @@ mod tests {
     use std::cell::RefCell;
 
     struct MockMessenger {
-        send_messages: RefCell<Vec<String>>,
+        sent_messages: RefCell<Vec<String>>,
     }
 
     impl MockMessenger {
         fn new() -> MockMessenger {
             MockMessenger { 
-                send_messages: RefCell::new(vec![]), 
+                sent_messages: RefCell::new(vec![]), 
             }
         }
+    }
+
+    impl Messenger for MockMessenger {
+        fn send(&self, message: &str) {
+            self.sent_messages.borrow_mut().push(String::from(message));
+        }
+    }
+
+    #[test]
+    fn it_sends_an_over_75_percent_warning_message() {
+        let mock_messenger = MockMessenger::new();
+        assert_eq!(mock_messenger.sent_messages.borrow().len(), 1);
     }
 }
